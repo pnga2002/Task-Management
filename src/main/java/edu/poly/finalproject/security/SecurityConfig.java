@@ -59,14 +59,12 @@ public class SecurityConfig {
 	//quy dinh cau hinh cho security
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecuriry) throws Exception{
-		return httpSecuriry.csrf().disable()//disable tan cong  dang cross-site vi dang su dung API
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and()
+		return httpSecuriry.csrf().disable()
 				.authorizeHttpRequests()
-					.antMatchers("/user/**").permitAll()//không cần đăng nhập vẫn truy cập được
-					.antMatchers(HttpMethod.POST,"/product").hasRole("ADMIN")
-					.antMatchers(HttpMethod.GET,"/product").hasAnyRole("ADMIN","USER")
-					.anyRequest().authenticated()//tất cả các request còn lại đều phải chức thực
+					.antMatchers("/**").permitAll()//không cần đăng nhập vẫn truy cập được
+//					.antMatchers(HttpMethod.POST,"/project").hasRole("ADMIN")
+//					.antMatchers(HttpMethod.GET,"/project").hasAnyRole("ADMIN","USER")
+//					.anyRequest().authenticated()//tất cả các request còn lại đều phải chức thực
 				.and().httpBasic()//su dung kieu chung thuc basic authen
 				.and().build();
 	}

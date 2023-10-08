@@ -5,33 +5,31 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.poly.finalproject.utils.JwtHelper;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
-	@Autowired
-	AuthenticationManager authenManage;
-	
-	@Autowired
-	private JwtHelper jwtHelper;
-	
-	@PostMapping("/signin")
-	public ResponseEntity<?> signin(@RequestParam String username,@RequestParam String pass){
-		UsernamePasswordAuthenticationToken authen = new UsernamePasswordAuthenticationToken(username, pass);
-		authenManage.authenticate(authen);
-		
-		String token = jwtHelper.generateToken("Muon cho gi cho");
-		return new ResponseEntity<>(token, HttpStatus.OK);
+	@GetMapping("")
+	public String user() {
+		return "user-table";
 	}
-	@PostMapping("/signup")
-	public ResponseEntity<?> signup(){
-		
-		return new ResponseEntity<>("sign up",HttpStatus.OK);
+	@GetMapping("user-add")
+	public String userAdd() {
+		return "user-add";
+	}
+	@GetMapping("user-detail")
+	public String userDetail() {
+		return "user-details";
+	}
+	@GetMapping("user-edit")
+	public String userEdit() {
+		return "user-add";
 	}
 }
