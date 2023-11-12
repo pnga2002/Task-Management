@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -91,19 +91,19 @@
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="user" class="waves-effect"><i class="fa fa-user fa-fw"
+                        <a href="/user" class="waves-effect"><i class="fa fa-user fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
                     </li>
                     <li>
-                        <a href="role" class="waves-effect"><i class="fa fa-modx fa-fw"
+                        <a href="/role" class="waves-effect"><i class="fa fa-modx fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
                     </li>
                     <li>
-                        <a href="project" class="waves-effect"><i class="fa fa-table fa-fw"
+                        <a href="/project" class="waves-effect"><i class="fa fa-table fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dự án</span></a>
                     </li>
                     <li>
-                        <a href="task" class="waves-effect"><i class="fa fa-table fa-fw"
+                        <a href="/task" class="waves-effect"><i class="fa fa-table fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
@@ -140,34 +140,26 @@
                                         <tr>
                                             <th>STT</th>
                                             <th>Tên Dự Án</th>
+                                            <th>Mô tả</th>
                                             <th>Ngày Bắt Đầu</th>
                                             <th>Ngày Kết Thúc</th>
                                             <th>Hành Động</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Phân tích dự án</td>
-                                            <td>22/05/2019</td>
-                                            <td>30/05/2019</td>
+                                        <tr th:each="item :${project}" th:object="${item}">
+                                            <td th:text="${item.id}"></td>
+                                            <td th:text="${item.tenduan}"></td>
+                                            <td th:text="${item.mota}"></td>
+                                            <td th:text="${item.ngaybatdau}"></td>
+                                            <td th:text="${item.ngayketthuc}"></td>
                                             <td>
                                                 <a href="#" class="btn btn-sm btn-primary">Sửa</a>
                                                 <a href="#" class="btn btn-sm btn-danger">Xóa</a>
-                                                <a href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
+                                                <a th:href="@{/project/{id}(id=${item.id})}" class="btn btn-sm btn-info">Xem</a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Thiết kế hệ thống</td>
-                                            <td>22/05/2019</td>
-                                            <td>30/05/2019</td>
-                                            <td>
-                                                <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-                                                <a href="#" class="btn btn-sm btn-danger">Xóa</a>
-                                                <a href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
-                                            </td>
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>

@@ -1,5 +1,7 @@
 package edu.poly.finalproject.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity(name="nguoidung")
 public class UserEntity {
@@ -26,13 +29,27 @@ public class UserEntity {
 	@Column(name="diachi")
 	private String diachi;
 
+	public List<ProjectEntity> getDuan() {
+		return duan;
+	}
+
+	public void setDuan(List<ProjectEntity> duan) {
+		this.duan = duan;
+	}
+
 	@Column(name="sodienthoai")
 	private String sodienthoai;
 	
 	@ManyToOne
 	@JoinColumn(name="id_loaithanhvien")
 	private RoleEntity role;
+	
+	@OneToMany(mappedBy = "users")
+	private List<ProjectEntity> duan;
 
+	@OneToMany(mappedBy = "users")
+	private List<TaskEntity> congviec;
+	
 	public String getMatkhau() {
 		return matkhau;
 	}
